@@ -168,7 +168,7 @@ void Shop::create_new_robot_model()
     //double cost;
   //  string description;
     string name = controller->get_string("Model Name", "Enter the name of the robot model: ");
-  /*  robot_model = new Robot_Model(
+    robot_model = new Robot_Model(
       name,
       controller->get_int(name, "Model Number: "),
       parts[controller->get_int(name, get_part_list() + "\nHead: ")],
@@ -179,7 +179,7 @@ void Shop::create_new_robot_model()
       robot_model->cost(), robot_model->get_description());
 
     models.push_back(*robot_model);
-    */
+
 }
 /*
 void Shop::create_new_robot_model(istream& ist)
