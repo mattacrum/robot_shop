@@ -53,10 +53,11 @@ class Controller
         fl_message_icon()->label("S");
         string res{fl_input(prompt.c_str(), 0)};
         result = atoi(res.c_str());
-        bool success = cin.good();
-        skip();
-        if (success) return result;
-        cerr << "### Not an integer!" << endl;
+        //bool success = cin.good();
+        //skip();
+        //if (success)
+        return result;
+      //  cerr << "### Not an integer!" << endl;
 
       }
     }
@@ -64,7 +65,7 @@ class Controller
     //
     // Return any valid integer between min_int and max_int, inclusive
     //
-    int get_int(string name,string prompt, int min_int, int max_int) {
+    int get_int(string name, string prompt, int min_int, int max_int) {
       int result = min_int - 1;
       while (true) {
         fl_message_title(name.c_str());
@@ -72,7 +73,7 @@ class Controller
         string res{fl_input(prompt.c_str(), 0)};
         result = atoi(res.c_str());
         if (min_int <= result && result <= max_int) return result;
-        cerr << "### Integer must be between " << min_int << " and " << max_int << "!\n";
+      //  cerr << "### Integer must be between " << min_int << " and " << max_int << "!\n";
       }
     }
 
@@ -86,16 +87,65 @@ class Controller
         fl_message_icon()->label("S");
         string res{fl_input(prompt.c_str(), 0)};
         result = atof(res.c_str());
-        bool success = cin.good();
-        skip();
-        if (success) return result;
-        cerr << "### Not a number!" << endl;
+      //  bool success = cin.good();
+      //  skip();
+      //  if (success)
+        return result;
+      //  cerr << "### Not a number!" << endl;
       }
+    }
+
+  
+
+    //Head get_head(string name, string prompt)
+
+    // /////////////////////////////////////////
+    // F I L E   I / O
+    // /////////////////////////////////////////
+
+    //
+    // Return any string from the file, including a simple \n
+    //
+    string get_string(istream& ist) {
+      string result = "";
+      getline(ist, result);
+      return result;
+    }
+
+    //
+    // Skip all characters in the input buffer up to and including the next newline
+    // For use after a input stream operation, to clear invalid text and the newline
+    //
+    void skip(istream& ist) {
+      if (ist.fail())
+        ist.clear();
+      ist.ignore(INT_MAX, '\n');
+    }
+
+    //
+    // Return any valid integer from the file
+    //
+    int get_int(istream& ist) {
+      int result = 0;
+      ist >> result;
+      skip(ist);
+      return result;
+    }
+
+    //
+    // Return any valid double from the file
+    //
+    double get_double(istream& ist) {
+      double result = 0.0;
+      ist >> result;
+      skip(ist);
+      return result;
     }
   private:
     //int get_int(string name, string prompt);
   //  string get_string(string name, string prompt);
   //  double get_double(string name, string prompt);
+
     Shop& shop;
     View& view;
 
